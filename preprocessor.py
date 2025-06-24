@@ -1,11 +1,11 @@
 """
-This module loads items from the game scripts and returns a dictionary of Item objects.
+This module contains a function to load items from the game scripts.
 """
 
 import re
 from item import Item
 
-def load_items():
+def load_items() -> dict[int, Item]:
     """
     Load items from the game scripts and returns a dictionary of Item objects.
     """
@@ -78,3 +78,5 @@ def load_items():
                     case "special":              items[id].special = value_string
                     case "special_amount":       items[id].special_amount = value_string
                     case _:                      pass  # Ignore unknown attributes
+    
+    return items

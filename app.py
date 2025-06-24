@@ -1,6 +1,11 @@
+"""
+Author: Tom Purcell
+"""
+
 from flask import Flask, render_template
 from preprocessor import load_items
 from item import Item
+import random
 
 # Create the Flask application
 app = Flask(__name__)
@@ -10,14 +15,8 @@ items = load_items()
 
 @app.route('/')
 def index():
-    return render_template('index.html')
 
-from flask import Flask, render_template
-from item import Item
+    # Randomly select 10 Items
+    rand_items = random.sample(list(items.values()), 10)
 
-# Create the Flask application
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+    return render_template('index.html', rand_items=rand_items)

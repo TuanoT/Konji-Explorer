@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    Hi, welcome to the Clothing Search app!
+    {% for item in rand_items %}
+        <li>{{ item.name }} - {{ item.type }}</li>
+    {% endfor %}
 </body>
 
 </html>

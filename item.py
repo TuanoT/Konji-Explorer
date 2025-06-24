@@ -19,6 +19,7 @@ class Item:
         self.special_amount = None
 
 
+    # Simple string representation of the item
     def __str__(self):
         attrs = vars(self)
         lines = [f"{key}: {value}" for key, value in attrs.items()]
