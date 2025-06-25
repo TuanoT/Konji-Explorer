@@ -1,8 +1,11 @@
 """
-This module contains a function to load items from the game scripts.
+This module contains functions to load items from the game scripts.
+Author: Tom Purcell
 """
 
+import os
 import re
+import xml.etree.ElementTree as et  # Handles sprite files
 from item import Item
 
 def load_items() -> dict[int, Item]:
@@ -67,7 +70,6 @@ def load_items() -> dict[int, Item]:
                 match attribute_string:
                     case "type":                 items[id].type = value_string
                     case "name":                 items[id].name = value_string
-                    case "sprite":               items[id].image = value_string
                     case "damage":               items[id].damage = float(value_string)
                     case "shot_speed":           items[id].shot_speed = float(value_string)
                     case "fire_rate":            items[id].fire_rate = float(value_string)
@@ -77,6 +79,23 @@ def load_items() -> dict[int, Item]:
                     case "shot_angle_increment": items[id].shot_angle = float(value_string)
                     case "special":              items[id].special = value_string
                     case "special_amount":       items[id].special_amount = value_string
+                    case "sprite":               items[id].image = get_image_from_sprite(value_string)        
                     case _:                      pass  # Ignore unknown attributes
     
     return items
+
+
+def get_image_from_sprite(sprite_name: str) -> str:
+
+    # Get the path to the sprite file
+    path = os.path.join("game_files", "sprites", f"{sprite_name}.gmx")
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Sprite '{path}' not found.")
+    
+    # Get the element tree from the sprite file
+    tree = et.parse(path)
+    root = tree.getroot()
+
+    for frame in root.findall(".//frame"):
+        if frame.attrib.get("index") == "0":
+            return os.path.basename(frame.text)
