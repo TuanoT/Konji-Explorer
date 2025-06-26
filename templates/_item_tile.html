@@ -1,5 +1,22 @@
 <div class="item-tile">
-    <img src="{{ item.image_url }}" alt="{{ item.name }}">
-    <h3>{{ item.name }}</h3>
-    <p>{{ item.description }}</p>
+    <img class="item-image" src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
+    <div class="item-info">
+        <h2 class="item-name">{{ item.name }}</h2>
+
+        <!-- Item tier -->
+        {% if item.tier|lower == "god" %}
+            <p class="item-tier" style="color: #ff0">God Tier</p>
+        {% elif item.tier == "psi" %}
+            <p class="item-tier" style="color: #b0f">Unobtainable</p>
+        {% elif item.tier == "collector" %}
+            <p class="item-tier" style="color: #f44">Collector Tier</p>
+        {% elif item.tier == "untiered" or item.tier == none %}
+            <p class="item-tier" style="color: #999">Untiered</p>
+        {% else %}
+            <p class="item-tier">Tier {{ item.tier }}</p>
+        {% endif %}
+        
+        <p class="item-type">{{ item.type|capitalize }}</p>
+        <span class="item-id">#{{ "%04d" % item.id }}</span>
+    </div>
 </div>

@@ -17,6 +17,6 @@ items = load_items()
 def index():
 
     # Randomly select 10 Items
-    rand_items = random.sample(list(items.values()), 10)
+    rand_items = random.sample(list(items.values()), 18)
 
     return render_template('index.html', rand_items=rand_items)

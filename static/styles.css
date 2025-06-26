@@ -1,0 +1,71 @@
+body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #222;
+    padding: 20px;
+}
+
+h2 {
+    color: #fff;
+}
+
+p {
+    color: #fff;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    justify-items: center;
+    width: 1232px;         /* 3 * 400px + 2 * 16px */
+    margin: 0 auto;        /* Center the grid */
+}
+
+
+/* Item Tile Styles */
+
+.item-tile {
+    display: flex;
+    align-items: center;
+    background-color: #444;
+    padding: 16px 16px;
+    width: 400px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-tile:hover {
+    transform: translateY(-4px);
+}
+
+.item-image {
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    object-fit: contain;
+}
+
+.item-name {
+    margin: 0;
+}
+
+.item-tier {
+    margin: 0;
+}
+
+.item-type {
+    margin: 0;
+}
+
+.item-info {
+    flex-grow: 1;
+    position: relative;
+}
+
+.item-id {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #999;
+}

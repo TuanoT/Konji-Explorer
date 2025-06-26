@@ -66,6 +66,9 @@ def load_items() -> dict[int, Item]:
                     raise ValueError(f"No item value in line: {line.strip()}")
                 value_string = match.group(1)
 
+                # Remove quotes from the value string if present
+                value_string = value_string.strip('"\'')
+
                 # Update the item with the value found in the line
                 match attribute_string:
                     case "type":                 items[id].type = value_string
@@ -88,7 +91,7 @@ def load_items() -> dict[int, Item]:
 def get_image_from_sprite(sprite_name: str) -> str:
 
     # Get the path to the sprite file
-    path = os.path.join("game_files", "sprites", f"{sprite_name}.gmx")
+    path = os.path.join("game_files", "sprites", f"{sprite_name}.sprite.gmx")
     if not os.path.exists(path):
         raise FileNotFoundError(f"Sprite '{path}' not found.")
     

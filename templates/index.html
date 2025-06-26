@@ -8,9 +8,11 @@
 </head>
 
 <body>
+    <div class="item-grid">
     {% for item in rand_items %}
-        <li>{{ item.name }} - {{ item.type }}</li>
+        {% include "_item_tile.html" %}
     {% endfor %}
+    </div>
 </body>
 
 </html>
