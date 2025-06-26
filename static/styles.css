@@ -24,6 +24,10 @@ p {
 
 /* Item Tile Styles */
 
+.item-link {
+    text-decoration: none;
+}
+
 .item-tile {
     display: flex;
     align-items: center;

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ item.name}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <div class="item-detail-container">
+        <a href="/" class="back-link">← Back</a>
+        <div class="item-detail-box">
+            <img class="item-detail-image" src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
+            <h1 class="item-detail-name">{{ item.name }}</h1>
+
+            <div class="item-detail-info">
+                <p><strong>Type:</strong> {{ item.type|capitalize }}</p>
+                <p><strong>Tier:</strong>
+                    {% if item.tier|lower == "god" %}
+                        <span style="color: #ff0;">God Tier</span>
+                    {% elif item.tier == "psi" %}
+                        <span style="color: #b0f;">Unobtainable</span>
+                    {% elif item.tier == "collector" %}
+                        <span style="color: #f44;">Collector Tier</span>
+                    {% elif item.tier == "untiered" or item.tier == none %}
+                        <span style="color: #999;">Untiered</span>
+                    {% else %}
+                        Tier {{ item.tier }}
+                    {% endif %}
+                </p>
+
+                {% if item.damage is not none %}
+                    <p><strong>Damage:</strong> {{ item.damage }}</p>
+                {% endif %}
+                {% if item.shot_speed is not none %}
+                    <p><strong>Shot Speed:</strong> {{ item.shot_speed }}</p>
+                {% endif %}
+                {% if item.fire_rate is not none %}
+                    <p><strong>Fire Rate:</strong> {{ item.fire_rate }}</p>
+                {% endif %}
+                {% if item.range is not none %}
+                    <p><strong>Range:</strong> {{ item.range }}</p>
+                {% endif %}
+                {% if item.shot_number is not none %}
+                    <p><strong>Shots:</strong> {{ item.shot_number }}</p>
+                {% endif %}
+                {% if item.shot_angle is not none %}
+                    <p><strong>Shot Angle:</strong> {{ item.shot_angle }}</p>
+                {% endif %}
+                {% if item.special %}
+                    <p><strong>Special:</strong> {{ item.special }}{% if item.special_amount %} ({{ item.special_amount }}){% endif %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
